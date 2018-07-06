@@ -1,0 +1,29 @@
+Git 
+======================
+
+creating a repository:  
+======================
+
+|$mkdir abcd(版本库名)|
+|$cd abcd(进入该目录) |
+|$pwd(显示当前目录)   |
+
+adding and committing files  
+======================
+|$git add filename       |  文件从工作区添加至暂存区                                                   |
+|$git commit -m "注释内容"|  提交暂存区文件到版本库                                                    |
+|$git status             |  相当好用的一个状态查看，随时可以从中获取信息，因为成功并不一定会有提示         |
+|$git diff               |  同样好用的一个修改查看                                                     |
+|$git log/reflog         |  都可以用来看历史操作，获得信息并追回版本  log后可以添加参数--pretty=oneline   |
+
+版本追回  
+======================
+1.
+  |$git log （--pretty=oneline）       | 查询已有的版本号                |
+  |$git reflog                         | 版本信息更加简略                |
+2.
+  |$git reset --hard HEAD^             | 追回上一个版本                  |
+  |$git reset --hard RepositoryNumber  | 追回指定版本                    |
+3.
+  |$git checkout --filename            | 用来撤销工作区的修改             |
+  |$git reset HEAD filename            | 用来将暂存区的修改退回给工作区    |
