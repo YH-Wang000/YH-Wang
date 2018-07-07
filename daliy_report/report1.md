@@ -64,25 +64,29 @@ adding and committing files
 | &git log --graph      | 可以查看分支合并图及相关信息，添加 --pretty=oneline同样可以简化信息，添加--abbrev-commit原因没有懂 |
 
 //禁用fast forward并进行分支合并
+
 fast forward模式下分支合并相当于直接移动master分支指针指向dev分支来获得在dev上的修改
+
 非fast forward模式下分支合并相当于将dev上的修改合并一次对master分支进行修改并自动提交，dev应处于原来的状态
-| 指令 | 作用 |
-| ---- | ---- |
+
+| 指令                                 | 作用                                                                |
+| ------------------------------------ | ------------------------------------------------------------------ |
 | $git merge --no-ff -m "注释内容" dev | 添加--no-ff来禁用ff模式，合并过程中存在一次自动提交 -m为自动提交添加注释 |
 
 当工作需要暂时间断时去完成另一个任务时使用stash命令
-| 指令 |  作用 |
-| ---- | ----- |
-| $git stash | 保存当前的工作状态，方便在未来某一刻恢复工作 |
-| $git stash list | 将曾经保存下来的工作列表罗列方便获取信息恢复 |
-| $git stash apply stash@{n} | 恢复指定工作状态 |
-| $git stash drop stash@{n} | 丢弃指定的工作状态 |
-| $git stash pop stash@{n}  | 上两步操作的合并操作 |
+
+| 指令                        |  作用                                         |
+| -------------------------- | --------------------------------------------- |
+| $git stash                 | 保存当前的工作状态，方便在未来某一刻恢复工作      |
+| $git stash list            | 将曾经保存下来的工作列表罗列方便获取信息恢复      |
+| $git stash apply stash@{n} | 恢复指定工作状态                                |
+| $git stash drop stash@{n}  | 丢弃指定的工作状态                              |
+| $git stash pop stash@{n}   | 上两步操作的合并操作                            |
 
 pr模式
 
-| 指令 | 作用 |
-| ---- | ---- |
-| $git branch --set-upstream-to=origin/dev dev | 将分支与远程分支链接 |
-| $git pull | 拉取当前分支所对应的远程分支的更新内容方便冲突处理和修改推送 |
-| git checkout -b branch-name origin/branch-name | 创建本机和远程分支对应的分支 |
+| 指令                                            | 作用                                                    |
+| ----------------------------------------------- | ------------------------------------------------------ |
+| $git branch --set-upstream-to=origin/dev dev    | 将分支与远程分支链接                                     |
+| $git pull                                       | 拉取当前分支所对应的远程分支的更新内容方便冲突处理和修改推送 |
+| $git checkout -b branch-name origin/branch-name  | 创建本机和远程分支对应的分支                              |
