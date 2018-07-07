@@ -32,6 +32,7 @@ adding and committing files
   | $git reset --hard HEAD^             | 追回上一个版本                  |
   | $git reset --hard RepositoryNumber  | 追回指定版本                    |
 3.
-  | 指令
+  | 指令                                |        作用                     |
+  | ----------------------------------- | ------------------------------ |
   | $git checkout --filename            | 用来撤销工作区的修改             |
   | $git reset HEAD filename            | 用来将暂存区的修改退回给工作区    |
