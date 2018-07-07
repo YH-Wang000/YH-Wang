@@ -17,7 +17,7 @@ adding and committing files
 | $git commit -m "注释内容" |  提交暂存区文件到版本库                                                    |
 | $git status             |  相当好用的一个状态查看，随时可以从中获取信息，因为成功并不一定会有提示         |
 | $git diff               |  同样好用的一个修改查看                                                     |
-| $git log/reflog         |  都可以用来看历史操作，获得信息并追回版本  log后可以添加参数--pretty=oneline   |
+| $git log/reflog         |  都可以用来看历史操作，获得信息并追回版本  log后可以添加参数--pretty=oneline，简化信息  |
 
 版本追回  
 ======================
@@ -36,3 +36,53 @@ adding and committing files
   | ----------------------------------- | ------------------------------ |
   | $git checkout --filename            | 用来撤销工作区的修改             |
   | $git reset HEAD filename            | 用来将暂存区的修改退回给工作区    |
+
+与远程仓库之间的同步和管理
+========================
+已经建立了github上的版本库/“RE/”。
+| 指令                                                  |      作用                             |
+| ----------------------------------------------------- | ------------------------------------ |
+| $git remote add origin git@git.com:YH-Wang000/RE.git  |  将本机版本库与github上的版本库相互关联 |
+| $git push origin master                               |   将当前分支上的内容推送到版本库        |
+| $git clone git@github.com:YH-Wang000/RE.git           |   将github上的版本库RE克隆到本机上     |
+
+本地分支上的操作
+========================
+分支创建
+| 指令                   |        作用          |
+| ---------------------- | ------------------- |
+| $git branch dev        |  创建一个分支dev     |
+| $git checkout dev      |    切换当前分支到dev |
+| $git checkout -b dev   |  上两个操作的合并操作，创建并切换到新的分支dev |
+分支合并
+| 指令                   |  作用                |
+| --------------------- | -------------------- |
+| $git branch           | 查看当前已有的分支方便切换 |
+| $git check master     | 切换到指定分支master      |
+| $git merge dev        | 将指定分支的修改合并到当前分支 |
+| $git branch -d dev    | 删除指定分支，如果当前分支有工作内容未提交，可使用-D强行删除 |
+| &git log --graph      | 可以查看分支合并图及相关信息，添加 --pretty=oneline同样可以简化信息，添加--abbrev-commit原因没有懂 |
+
+//禁用fast forward并进行分支合并
+fast forward模式下分支合并相当于直接移动master分支指针指向dev分支来获得在dev上的修改
+非fast forward模式下分支合并相当于将dev上的修改合并一次对master分支进行修改并自动提交，dev应处于原来的状态
+| 指令 | 作用 |
+| ---- | ---- |
+| $git merge --no-ff -m "注释内容" dev | 添加--no-ff来禁用ff模式，合并过程中存在一次自动提交 -m为自动提交添加注释 |
+
+当工作需要暂时间断时去完成另一个任务时使用stash命令
+| 指令 |  作用 |
+| ---- | ----- |
+| $git stash | 保存当前的工作状态，方便在未来某一刻恢复工作 |
+| $git stash list | 将曾经保存下来的工作列表罗列方便获取信息恢复 |
+| $git stash apply stash@{n} | 恢复指定工作状态 |
+| $git stash drop stash@{n} | 丢弃指定的工作状态 |
+| $git stash pop stash@{n}  | 上两步操作的合并操作 |
+
+pr模式
+
+| 指令 | 作用 |
+| ---- | ---- |
+| $git branch --set-upstream-to=origin/dev dev | 将分支与远程分支链接 |
+| $git pull | 拉取当前分支所对应的远程分支的更新内容方便冲突处理和修改推送 |
+| git checkout -b branch-name origin/branch-name | 创建本机和远程分支对应的分支 |
